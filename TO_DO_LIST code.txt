@@ -1,0 +1,63 @@
+def display_menu():
+  print("Menu:")
+  print("A.Add Task")
+  print("B.View Task")
+  print("C.Mark as Done")
+  print("D.Exit")
+  
+def add_task(tasks):
+      task=input("Enter task description:")
+      tasks.append(task)
+      print("Task added successfully!")
+      
+def view_tasks(tasks):      
+    print("\nTasks:")
+    for i,task in enumerate(tasks,start=1):
+        print(f"{i}.{task}")
+        
+def mark_task_done(tasks):
+    if not tasks:
+        print("No tasks to mark as done.")
+        return
+    
+    view_tasks(tasks)
+    index=int(input("Enter task index to mark as done:"))-1
+   
+    if 0<=index<len(tasks):
+       removed_task=tasks.pop(index)
+       print(f"Task'{removed_task}'marked as done and removed.")
+    else:
+        print("invalid task index.")
+          
+def load_tasks():
+    try:
+        with open("tasks.txt","r")as f:
+          return f.read().splitlines()
+    except FileNotFoundError:
+        return[]
+        
+        
+def main():
+    tasks=load_tasks()
+    
+    
+    while true:
+        display_menu()
+        
+        choice=input("Enter your choice:")
+        
+        if choice=='A':
+            add_task(tasks)
+        elif choice =='B':
+            View_tasks(tasks)
+        elif choice == 'C':
+            mark_task_done(tasks)
+        elif choice == 'D':
+            print("Exiting.")
+            save_task(tasks)
+            break
+        else:
+            print("Invalid choice.Please select a correct option.")
+            
+"""if__name__=="__main__":
+               main()"""
